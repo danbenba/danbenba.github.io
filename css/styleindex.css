@@ -65,3 +65,41 @@ footer p
     text-align: center;
     letter-spacing: 0.1em;
 }
+body {
+	background-color: #f9fbfcde;
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+.container {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	text-align: center;
+}
+
+h1 {
+	font-size: 50px;
+	margin-bottom: 20px;
+}
+
+p {
+	font-size: 24px;
+	margin-bottom: 40px;
+}
+
+a {
+	display: inline-block;
+	padding: 12px 20px;
+	background-color: #1A1B1D;
+	color: #fff;
+	font-size: 12px;
+	text-decoration: none;
+	border-radius: 5px;
+	transition: background-color 0.2s ease;
+}
+
+a:hover {
+	background-color: #1A1B1D;
+}
