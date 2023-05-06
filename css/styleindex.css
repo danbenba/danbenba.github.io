@@ -66,7 +66,7 @@ footer p
     letter-spacing: 0.1em;
 }
 body {
-	background-color: #f9fbfcde;
+	background-color: #f1f5f5;
 	font-family: Arial, sans-serif;
 	margin: 0;
 	padding: 0;
@@ -85,15 +85,15 @@ h1 {
 }
 
 p {
-	font-size: 24px;
-	margin-bottom: 40px;
+	font-size: 18px;
+	margin-bottom: 25px;
 }
 
 a {
 	display: inline-block;
-	padding: 12px 20px;
+	padding: 24px 40px;
 	background-color: #1A1B1D;
-	color: #fff;
+	color: #0f0d99bd;
 	font-size: 12px;
 	text-decoration: none;
 	border-radius: 5px;
