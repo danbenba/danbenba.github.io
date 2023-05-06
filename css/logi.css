@@ -56,7 +56,7 @@ header {
     margin-right: 10px;
   }
   
-  form button[type="submit"] {
+  form button1[type="submit"] {
     background-color: #0080ff;
     color: #fff;
     border: none;
@@ -64,6 +64,15 @@ header {
     border-radius: 5px;
     cursor: pointer;
   }
+  
+form button[type="submit"] {
+  background-color: #575858c4;
+  color: #575858c4;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
   
   /* Styles pour la section des produits */
   main section {
