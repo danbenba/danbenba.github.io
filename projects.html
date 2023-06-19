@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Ma fenêtre de projet</title>
+  <title>danbenba - Projects</title>
   <style>
     body {
       margin: 0;
@@ -20,6 +20,7 @@
     .project-image {
       width: 200px;
       height: 200px;
+      background-color: #f0f0f0;
     }
     .project-button {
       display: block;
@@ -31,15 +32,34 @@
       text-decoration: none;
       margin-top: 10px;
     }
+    .loading-message {
+      display: none;
+      margin-top: 10px;
+      font-weight: bold;
+    }
   </style>
+  <script>
+    function showLoadingMessage() {
+      var loadingMsg = document.getElementById("loading-message");
+      var projectButton = document.getElementById("project-button");
+
+      projectButton.style.display = "none";
+      loadingMsg.style.display = "block";
+
+      setTimeout(function() {
+        window.location.href = "projects/quizz/quizz";
+      }, 2000); // Délai de 2 secondes avant la redirection (à adapter selon vos besoins)
+    }
+  </script>
 </head>
 <body>
   <div class="container">
     <div class="project-box">
       <div class="project-image">
-        <img src="https://actu-hg.hatier.fr/sites/default/files/quiz%20Histoire%206.jpg" alt="Image du projet">
+        <!-- Insérez ici l'URL de l'image de votre projet -->
       </div>
-      <a href="projects/quizz/quizz" class="project-button">Accéder au projet</a>
+      <a href="#" id="project-button" class="project-button" onclick="showLoadingMessage()">Accéder au projet</a>
+      <div id="loading-message" class="loading-message">Chargement du projet...</div>
     </div>
   </div>
 </body>
