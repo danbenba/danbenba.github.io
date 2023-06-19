@@ -1,49 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Quiz d'histoire et de géographie - Ensemble de tout l'année</title>
+    <title>Quiz d'histoire et de géographie 2</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f1f1f1;
             padding: 20px;
         }
+        
         h1 {
             text-align: center;
             color: #333;
         }
+        
         #question {
             margin-top: 20px;
             font-weight: bold;
             color: #555;
         }
+        
         #options {
             margin-top: 10px;
         }
+        
         #options label {
             display: block;
             margin-top: 10px;
             color: #666;
         }
-        #submit {
+        
+        #submit, #next, #show-answers {
             margin-top: 20px;
             text-align: center;
         }
+        
         #result {
             margin-top: 20px;
             font-weight: bold;
             text-align: center;
             color: #333;
         }
-        #next {
-            display: none;
+        
+        #start-quiz {
             margin-top: 20px;
             text-align: center;
         }
     </style>
 </head>
 <body>
-    <h1>Quiz d'histoire et de géographie</h1>
+    <h1>Quiz d'histoire et de géographie 2 pour la fin d'année, fait par Dany BENBARA</h1>
+
+    <div id="description" style="text-align: center;">
+        <p>Testez vos connaissances en histoire et en géographie avec ce quiz !</p>
+        <p>Le quiz se compose de plusieurs questions. Sélectionnez la bonne réponse ou saisissez votre réponse dans le champ prévu. Cliquez sur "Soumettre" pour vérifier votre réponse.</p>
+        <p>Après avoir répondu à une question, cliquez sur "Question suivante" pour passer à la suivante.</p>
+        <p>Une fois le quiz terminé, vous pourrez voir votre score et les réponses correctes.</p>
+    </div>
+
     <div id="question"></div>
     <div id="options"></div>
     <div id="submit">
@@ -53,194 +67,132 @@
     <div id="next">
         <button onclick="loadNextQuestion()">Question suivante</button>
     </div>
+    <div id="show-answers">
+        <button onclick="showAnswers()">Voir les réponses</button>
+    </div>
 
+    <button id="start-quiz" onclick="startQuiz()">Commencer le quiz</button>
+
+    <script src="js/questions.js"></script>
     <script>
-        var questions = [
-            {
-                question: "L'école existe depuis quand ?",
-                options: ["L'Antiquité", "Hier", "1985", "998"],
-                answer: "L'Antiquité"
-            },
-            {
-                question: "Comment vivaient les hommes du Paléolithique ?",
-                options: ["Chasse, cueillette et pêche", "Agriculture", "Commerce", "Élevage"],
-                answer: "Chasse, cueillette et pêche"
-            },
-            {
-                question: "Sao Paulo est-elle une grande métropole ?",
-                options: ["Oui", "Non"],
-                answer: "Oui"
-            },
-            {
-                question: "Combien de personnes habitent Sao Paulo ?",
-                options: ["Environ 12 millions", "Environ 5 millions", "Environ 20 millions", "Environ 8 millions"],
-                answer: "Environ 12 millions"
-            },
-            {
-                question: "Quand commence la période de l'histoire ?",
-                options: ["Avec l'apparition de l'écriture", "Au Moyen Âge", "À la Renaissance", "À la Préhistoire"],
-                answer: "Avec l'apparition de l'écriture"
-            },
-            {
-                question: "Comment les villes étaient-elles caractérisées autrefois ?",
-                options: ["Remparts, marchés animés et architecture spécifique", "Gratte-ciel et centres commerciaux", "Transport en commun et parcs", "Immeubles résidentiels et espaces verts"],
-                answer: "Remparts, marchés animés et architecture spécifique"
-            },
-            {
-                question: "Citez-moi trois droits des citoyens.",
-                options: ["Droit à la liberté d'expression", "Droit de vote", "Droit à l'éducation", "Droit de propriété"],
-                answer: "Droit à la liberté d'expression"
-            },
-            {
-                question: "Citez-moi trois devoirs des citoyens.",
-                options: ["Respect des lois", "Paiement des impôts", "Participation à la vie civique", "Service militaire"],
-                answer: "Respect des lois"
-            },
-            {
-                question: "Qu'est-ce que la politique ?",
-                options: ["Ensemble des activités liées à la gouvernance d'un pays", "Étude des phénomènes naturels", "Activités artistiques et culturelles", "Pratique sportive"],
-                answer: "Ensemble des activités liées à la gouvernance d'un pays"
-            },
-            {
-                question: "Les déserts sont-ils marqués par quoi ?",
-                options: ["Faible pluviométrie et végétation rare", "Climat humide et forêt dense", "Grands lacs et rivières", "Montagnes et vallées"],
-                answer: "Faible pluviométrie et végétation rare"
-            },
-            {
-                question: "Quelles sont les contraintes naturelles au Groenland ?",
-                options: ["Climat froid, tempêtes de neige et nuit polaire", "Climat tropical et forêt équatoriale", "Sécheresse et manque d'eau", "Volcans et tremblements de terre"],
-                answer: "Climat froid, tempêtes de neige et nuit polaire"
-            },
-            {
-                question: "Quand la Gaule devient-elle romaine ?",
-                options: ["Vers 50 avant J.-C.", "Vers 500 après J.-C.", "Vers 1000 avant J.-C.", "Vers 1500 après J.-C."],
-                answer: "Vers 50 avant J.-C."
-            },
-            {
-                question: "Qu'est-ce que la romanisation ?",
-                options: ["Influence de la culture romaine sur les territoires conquis", "Conquête de nouveaux territoires par les Romains", "Déclin de l'Empire romain", "Période de paix et de prospérité dans l'Empire romain"],
-                answer: "Influence de la culture romaine sur les territoires conquis"
-            },
-            {
-                question: "Comment le prophète Abraham est-il appelé ?",
-                options: ["Ibrahim", "Moïse", "David", "Jésus"],
-                answer: "Ibrahim"
-            },
-            {
-                question: "Quand est-il né ?",
-                options: ["Vers 2000 avant J.-C.", "Vers 500 après J.-C.", "Vers 1000 avant J.-C.", "Vers 1500 après J.-C."],
-                answer: "Vers 2000 avant J.-C."
-            },
-            {
-                question: "Quelle est la capitale du Brésil ?",
-                options: ["Brasília", "Rio de Janeiro", "São Paulo", "Salvador"],
-                answer: "Brasília"
-            }
-        ];
-
+        // Variables globales
         var currentQuestion = 0;
         var score = 0;
 
+        // Fonction pour démarrer le quiz
+        function startQuiz() {
+            document.getElementById("start-quiz").style.display = "none";
+            loadQuestion();
+        }
+
+        // Fonction pour charger une question
         function loadQuestion() {
             var questionDiv = document.getElementById("question");
             var optionsDiv = document.getElementById("options");
             var resultDiv = document.getElementById("result");
             var submitBtn = document.getElementById("submit");
             var nextBtn = document.getElementById("next");
+            var showAnswersBtn = document.getElementById("show-answers");
 
             if (currentQuestion < questions.length) {
                 var question = questions[currentQuestion];
                 questionDiv.innerHTML = question.question;
 
                 optionsDiv.innerHTML = "";
-                if (question.options.length === 4) {
+                if (question.options) {
                     for (var i = 0; i < question.options.length; i++) {
-                        var optionLabel = document.createElement("label");
-                        var optionInput = document.createElement("input");
-                        optionInput.type = "radio";
-                        optionInput.name = "option";
-                        optionInput.value = question.options[i];
-                        optionLabel.appendChild(optionInput);
-                        optionLabel.appendChild(document.createTextNode(question.options[i]));
-                        optionsDiv.appendChild(optionLabel);
-                    }
-                } else if (question.options.length === 5) {
-                    for (var i = 0; i < question.options.length; i++) {
-                        var optionLabel = document.createElement("label");
-                        var optionInput = document.createElement("input");
-                        optionInput.type = "checkbox";
-                        optionInput.name = "option";
-                        optionInput.value = question.options[i];
-                        optionLabel.appendChild(optionInput);
-                        optionLabel.appendChild(document.createTextNode(question.options[i]));
-                        optionsDiv.appendChild(optionLabel);
+                        var option = question.options[i];
+                        var radioBtn = document.createElement("input");
+                        radioBtn.type = "radio";
+                        radioBtn.name = "answer";
+                        radioBtn.value = option;
+                        optionsDiv.appendChild(radioBtn);
+
+                        var label = document.createElement("label");
+                        label.innerHTML = option;
+                        optionsDiv.appendChild(label);
                     }
                 } else {
-                    var inputField = document.createElement("input");
-                    inputField.type = "text";
-                    inputField.id = "textAnswer";
-                    optionsDiv.appendChild(inputField);
+                    var textInput = document.createElement("input");
+                    textInput.type = "text";
+                    textInput.name = "answer";
+                    optionsDiv.appendChild(textInput);
                 }
 
                 resultDiv.innerHTML = "";
                 submitBtn.style.display = "block";
                 nextBtn.style.display = "none";
+                showAnswersBtn.style.display = "none";
             } else {
-                showResult();
+                questionDiv.innerHTML = "";
+                optionsDiv.innerHTML = "";
+                resultDiv.innerHTML = "Quiz terminé. Votre score : " + score + " sur " + questions.length;
+                submitBtn.style.display = "none";
+                nextBtn.style.display = "none";
+                showAnswersBtn.style.display = "block";
             }
         }
 
+        // Fonction pour vérifier la réponse
         function checkAnswer() {
-            var options = document.getElementsByName("option");
-            var selectedOptions = [];
+            var selectedOption = document.querySelector('input[name="answer"]:checked');
+            var resultDiv = document.getElementById("result");
+            var submitBtn = document.getElementById("submit");
+            var nextBtn = document.getElementById("next");
 
-            for (var i = 0; i < options.length; i++) {
-                if (options[i].checked) {
-                    selectedOptions.push(options[i].value);
-                }
-            }
-
-            if (selectedOptions.length > 0) {
+            if (selectedOption) {
+                var answer = selectedOption.value;
                 var question = questions[currentQuestion];
-                if (JSON.stringify(selectedOptions) === JSON.stringify(question.answer)) {
+
+                if (answer === question.answer) {
+                    resultDiv.innerHTML = "Bonne réponse !";
                     score++;
-                    document.getElementById("result").innerHTML = "Correct!";
                 } else {
-                    document.getElementById("result").innerHTML = "Faux!";
+                    resultDiv.innerHTML = "Mauvaise réponse. La bonne réponse est : " + question.answer;
                 }
 
-                document.getElementById("submit").style.display = "none";
-                document.getElementById("next").style.display = "block";
-            } else if (question.options.length === 3) {
-                var textAnswer = document.getElementById("textAnswer").value;
-                if (textAnswer !== "") {
-                    var question = questions[currentQuestion];
-                    if (textAnswer.toLowerCase() === question.answer.toLowerCase()) {
-                        score++;
-                        document.getElementById("result").innerHTML = "Correct!";
-                    } else {
-                        document.getElementById("result").innerHTML = "Faux!";
-                    }
-
-                    document.getElementById("submit").style.display = "none";
-                    document.getElementById("next").style.display = "block";
-                }
+                submitBtn.style.display = "none";
+                nextBtn.style.display = "block";
+            } else {
+                resultDiv.innerHTML = "Veuillez sélectionner une réponse.";
             }
         }
 
+        // Fonction pour charger la question suivante
         function loadNextQuestion() {
             currentQuestion++;
             loadQuestion();
         }
 
-        function showResult() {
+        // Fonction pour afficher les réponses
+        function showAnswers() {
+            var questionDiv = document.getElementById("question");
+            var optionsDiv = document.getElementById("options");
             var resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = "Quiz terminé! Votre score est de " + score + "/" + questions.length;
-            document.getElementById("submit").style.display = "none";
-            document.getElementById("next").style.display = "none";
-        }
+            var submitBtn = document.getElementById("submit");
+            var nextBtn = document.getElementById("next");
+            var showAnswersBtn = document.getElementById("show-answers");
 
-        loadQuestion();
+            questionDiv.innerHTML = "";
+            optionsDiv.innerHTML = "";
+
+            for (var i = 0; i < questions.length; i++) {
+                var question = questions[i];
+                var questionText = document.createElement("p");
+                questionText.innerHTML = question.question;
+                questionDiv.appendChild(questionText);
+
+                var answerText = document.createElement("p");
+                answerText.innerHTML = "Réponse : " + question.answer;
+                answerText.style.fontWeight = "bold";
+                optionsDiv.appendChild(answerText);
+            }
+
+            resultDiv.innerHTML = "Quiz terminé. Votre score : " + score + " sur " + questions.length;
+            submitBtn.style.display = "none";
+            nextBtn.style.display = "none";
+            showAnswersBtn.style.display = "none";
+        }
     </script>
 </body>
 </html>
