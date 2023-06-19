@@ -8,18 +8,62 @@ document.addEventListener("DOMContentLoaded", function() {
       }
     });
   
+    var terminal = document.querySelector(".terminal");
+    terminal.addEventListener("click", function() {
+      if (terminal.requestFullscreen) {
+        terminal.requestFullscreen();
+      } else if (terminal.mozRequestFullScreen) {
+        terminal.mozRequestFullScreen();
+      } else if (terminal.webkitRequestFullscreen) {
+        terminal.webkitRequestFullscreen();
+      } else if (terminal.msRequestFullscreen) {
+        terminal.msRequestFullscreen();
+      }
+    });
+  
+    document.addEventListener("fullscreenchange", exitFullscreenHandler);
+    document.addEventListener("mozfullscreenchange", exitFullscreenHandler);
+    document.addEventListener("webkitfullscreenchange", exitFullscreenHandler);
+    document.addEventListener("msfullscreenchange", exitFullscreenHandler);
+  
+    function exitFullscreenHandler() {
+      if (
+        !document.fullscreenElement &&
+        !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement &&
+        !document.msFullscreenElement
+      ) {
+        console.log("Sortie du mode plein écran");
+      }
+    }
+  
     function processCommand(command) {
       var output = "";
   
       switch (command) {
         case "help":
-          output = "Commandes disponibles : aide, à propos, contact";
+          output = "Commandes disponibles : help, about, contact, projects, clear";
           break;
         case "about":
-          output = "Il s'agit d'une simple interface de terminal.";
+          output = "Un site développé par Dany BENBARA sous le surnon danbenba. Ce projet l'un de mes plus gros !";
           break;
         case "contact":
           output = "Vous pouvez nous joindre à danbenba@proton.me.";
+          break;
+        case "projects":
+          output = "Liste de projets : projet1, projet2, projet3";
+          break;
+        case "projet1":
+          output = "DixonCode : Fait";
+          break;
+        case "projet2":
+          output = "PassGen V2 : Fait";
+          break;
+        case "projet3":
+          output = "BrutExemple : Fait";
+          break;
+        case "clear":
+          clearTerminal();
           break;
         default:
           output = "Commande non trouvée. Tapez 'help' pour voir les commandes disponibles.";
@@ -34,6 +78,11 @@ document.addEventListener("DOMContentLoaded", function() {
       outputElement.textContent = output;
       terminalContent.appendChild(outputElement);
       terminalContent.scrollTop = terminalContent.scrollHeight;
+    }
+  
+    function clearTerminal() {
+      var terminalContent = document.querySelector(".terminal-content");
+      terminalContent.innerHTML = "";
     }
   });
   
