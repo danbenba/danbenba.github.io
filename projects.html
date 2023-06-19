@@ -20,10 +20,13 @@
       align-items: center;
     }
     .project-image {
-      width: 256px;
-      height: 356px;
+      width: 370px;
+      height: 236px;
       background-color: #f0f0f0;
       margin-right: 20px;
+      background-image: url("https://actu-hg.hatier.fr/sites/default/files/quiz%20Histoire%206.jpg");
+      background-size: cover;
+      background-position: center;
     }
     .project-info {
       flex: 1;
@@ -70,12 +73,10 @@
 <body>
   <div class="container">
     <div class="project-box">
-      <div class="project-image">
-        <!-- Insérez ici l'URL de l'image de votre projet -->
-      </div>
+      <div class="project-image"></div>
       <div class="project-info">
-        <h2 class="project-title">Nom du projet</h2>
-        <p class="project-description">Description du projet</p>
+        <h2 class="project-title">Quizz Histoire Géographie 2</h2>
+        <p class="project-description">Un dernier quizz qui regroupe tout l'année.</p>
         <a href="#" id="project-button" class="project-button" onclick="showLoadingMessage()">Accéder au projet</a>
         <div id="loading-message" class="loading-message">Chargement du projet...</div>
       </div>
