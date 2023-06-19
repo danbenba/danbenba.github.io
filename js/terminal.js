@@ -39,10 +39,10 @@ document.addEventListener("DOMContentLoaded", function() {
 
     function processCommand(command) {
         var output = "";
-
+    
         switch (command) {
             case "help":
-                output = "Commandes disponibles : help, about, contact, projects, clear";
+                output = "Commandes disponibles : help, about, contact, projects, clear, exit";
                 break;
             case "about":
                 output = "Un site développé par Dany BENBARA sous le surnom danbenba. Ce projet est l'un de mes plus gros !";
@@ -65,12 +65,15 @@ document.addEventListener("DOMContentLoaded", function() {
             case "clear":
                 clearTerminal();
                 break;
+            case "exit":
+                window.location.href = "https://danbenba.github.io/client";
+                break;
             default:
                 output = "Commande non trouvée. Tapez 'help' pour voir les commandes disponibles.";
         }
-
+    
         displayOutput(output);
-    }
+    }    
 
     function displayOutput(output) {
         var terminalContent = document.querySelector(".terminal-content");
