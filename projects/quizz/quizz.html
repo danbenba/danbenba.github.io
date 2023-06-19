@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Quiz d'histoire et de géographie</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        #question {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #555;
+        }
+        #options {
+            margin-top: 10px;
+        }
+        #options label {
+            display: block;
+            margin-top: 10px;
+            color: #666;
+        }
+        #submit {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+            color: #333;
+        }
+        #next {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Quiz d'histoire et de géographie</h1>
+    <div id="question"></div>
+    <div id="options"></div>
+    <div id="submit">
+        <button onclick="checkAnswer()">Soumettre</button>
+    </div>
+    <div id="result"></div>
+    <div id="next">
+        <button onclick="loadNextQuestion()">Question suivante</button>
+    </div>
+
+    <script>
+        var questions = [
+            {
+                question: "Quelle est la capitale de la France ?",
+                options: ["Paris", "Londres", "Rome", "Berlin"],
+                answer: "Paris",
+                imagePath: "paris.jpg"
+            },
+            {
+                question: "Quel pays est connu pour la Grande Muraille ?",
+                options: ["Japon", "Chine", "Inde", "Mexique"],
+                answer: "Chine",
+                imagePath: "great_wall.jpg"
+            },
+            
+        ];
+
+        var currentQuestion = 0;
+        var score = 0;
+
+        function loadQuestion() {
+            var questionDiv = document.getElementById("question");
+            var optionsDiv = document.getElementById("options");
+            var resultDiv = document.getElementById("result");
+            var submitBtn = document.getElementById("submit");
+            var nextBtn = document.getElementById("next");
+
+            if (currentQuestion < questions.length) {
+                var question = questions[currentQuestion];
+                questionDiv.innerHTML = question.question;
+
+                optionsDiv.innerHTML = "";
+                for (var i = 0; i < question.options.length; i++) {
+                    var optionLabel = document.createElement("label");
+                    var optionInput = document.createElement("input");
+                    optionInput.type = "radio";
+                    optionInput.name = "option";
+                    optionInput.value = question.options[i];
+                    optionLabel.appendChild(optionInput);
+                    optionLabel.appendChild(document.createTextNode(question.options[i]));
+                    optionsDiv.appendChild(optionLabel);
+                }
+
+                resultDiv.innerHTML = "";
+                submitBtn.style.display = "block";
+                nextBtn.style.display = "none";
+            } else {
+                showResult();
+            }
+        }
+
+        function checkAnswer() {
+            var options = document.getElementsByName("option");
+            var selectedOption = null;
+
+            for (var i = 0; i < options.length; i++) {
+                if (options[i].checked) {
+                    selectedOption = options[i].value;
+                    break;
+                }
+            }
+
+            if (selectedOption !== null) {
+                var question = questions[currentQuestion];
+                if (selectedOption === question.answer) {
+                    score++;
+                    document.getElementById("result").innerHTML = "Correct!";
+                } else {
+                    document.getElementById("result").innerHTML = "Faux!";
+                }
+
+                document.getElementById("submit").style.display = "none";
+                document.getElementById("next").style.display = "block";
+            }
+        }
+
+        function loadNextQuestion() {
+            currentQuestion++;
+            loadQuestion();
+        }
+
+        function showResult() {
+            var resultDiv = document.getElementById("result");
+            resultDiv.innerHTML = "Quiz terminé! Votre score est de " + score + "/" + questions.length;
+            document.getElementById("submit").style.display = "none";
+            document.getElementById("next").style.display = "none";
+        }
+
+        loadQuestion();
+    </script>
+</body>
+</html>
