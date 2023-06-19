@@ -16,11 +16,26 @@
       border: 1px solid #ccc;
       padding: 20px;
       margin-bottom: 20px;
+      display: flex;
+      align-items: center;
     }
     .project-image {
-      width: 200px;
-      height: 200px;
+      width: 256px;
+      height: 356px;
       background-color: #f0f0f0;
+      margin-right: 20px;
+    }
+    .project-info {
+      flex: 1;
+    }
+    .project-title {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .project-description {
+      font-size: 16px;
+      margin-bottom: 10px;
     }
     .project-button {
       display: block;
@@ -58,8 +73,12 @@
       <div class="project-image">
         <!-- Insérez ici l'URL de l'image de votre projet -->
       </div>
-      <a href="#" id="project-button" class="project-button" onclick="showLoadingMessage()">Accéder au projet</a>
-      <div id="loading-message" class="loading-message">Chargement du projet...</div>
+      <div class="project-info">
+        <h2 class="project-title">Nom du projet</h2>
+        <p class="project-description">Description du projet</p>
+        <a href="#" id="project-button" class="project-button" onclick="showLoadingMessage()">Accéder au projet</a>
+        <div id="loading-message" class="loading-message">Chargement du projet...</div>
+      </div>
     </div>
   </div>
 </body>
