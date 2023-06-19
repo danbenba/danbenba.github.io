@@ -4,40 +4,55 @@
     <meta charset="UTF-8">
     <title>Connexion - Miral</title>
     <link rel="stylesheet" href="css/loginstyle.css">
+    <style>
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <div class="box">
         <div class="form">
             <h2>Connexion à Miral</h2>
-            <form action="client" method="GET">
+            <form action="#" method="GET" onsubmit="return checkCredentials()">
                 <link rel="shortcut icon" href="/img/icon.png">
                 <div class="inputBox">
-                    <input type="text" required="required">
+                    <input type="text" id="username" required="required">
                     <span>Nom d'utilisateur</span>
                     <i></i>
                 </div>
                 <div class="inputBox">
-                    <input type="password" required="required">
-                    <span>Mots de passe</span>
+                    <input type="password" id="password" required="required">
+                    <span>Mot de passe</span>
                     <i></i>
                 </div>
                 <div class="links">
-                    <a href="frog">Mots de passe oublié.</a>
-                    <a href="sign-up">Crée un compte.</a>
+                    <a href="frog">Mot de passe oublié.</a>
+                    <a href="sign-up">Créer un compte.</a>
                 </div>
                 <input type="submit" value="Connexion" alt="client">
-
-                <script>
-                    function storeData() {
-                        var username = document.getElementById("username").value;
-                        var password = document.getElementById("password").value;
-    
-                        localStorage.setItem("username", username);
-                        localStorage.setItem("password", password);
-                    }
-                </script>
+                <div id="error-msg" class="error-message"></div>
             </form>
         </div>
     </div>
+
+    <script>
+        function checkCredentials() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            var errorMsg = document.getElementById("error-msg");
+
+            if (username === "danbenba" && password === "danbenba") {
+                // Rediriger vers le fichier client.html si les identifiants sont corrects
+                window.location.href = "client.html";
+                return false;
+            } else {
+                // Afficher un message d'erreur si les identifiants sont incorrects
+                errorMsg.textContent = "Compte non existant";
+                return false;
+            }
+        }
+    </script>
 </body>
 </html>
