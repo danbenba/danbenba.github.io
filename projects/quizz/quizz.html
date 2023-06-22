@@ -8,56 +8,53 @@
             background-color: #f1f1f1;
             padding: 20px;
         }
-        
         h1 {
             text-align: center;
             color: #333;
         }
-        
         #question {
             margin-top: 20px;
             font-weight: bold;
             color: #555;
         }
-        
         #options {
             margin-top: 10px;
         }
-        
         #options label {
             display: block;
             margin-top: 10px;
             color: #666;
         }
-        
-        #submit, #next, #show-answers {
+        #submit {
             margin-top: 20px;
             text-align: center;
         }
-        
         #result {
             margin-top: 20px;
             font-weight: bold;
             text-align: center;
             color: #333;
         }
-        
-        #start-quiz {
+        #next {
+            display: none;
             margin-top: 20px;
             text-align: center;
+        }
+        #show-answers {
+            display: none;
+            margin-top: 20px;
+            text-align: center;
+        }
+        #copyright {
+            margin-top: 20px;
+            font-size: 12px;
+            text-align: center;
+            color: #999;
         }
     </style>
 </head>
 <body>
     <h1>Quiz d'histoire et de géographie 2 pour la fin d'année, fait par Dany BENBARA</h1>
-
-    <div id="description" style="text-align: center;">
-        <p>Testez vos connaissances en histoire et en géographie avec ce quiz !</p>
-        <p>Le quiz se compose de plusieurs questions. Sélectionnez la bonne réponse ou saisissez votre réponse dans le champ prévu. Cliquez sur "Soumettre" pour vérifier votre réponse.</p>
-        <p>Après avoir répondu à une question, cliquez sur "Question suivante" pour passer à la suivante.</p>
-        <p>Une fois le quiz terminé, vous pourrez voir votre score et les réponses correctes.</p>
-    </div>
-
     <div id="question"></div>
     <div id="options"></div>
     <div id="submit">
@@ -70,129 +67,10 @@
     <div id="show-answers">
         <button onclick="showAnswers()">Voir les réponses</button>
     </div>
-
-    <button id="start-quiz" onclick="startQuiz()">Commencer le quiz</button>
+    <div id="copyright">
+        &copy; Miral&reg; 2021-2023, tous droits réservés.
+    </div>
 
     <script src="js/questions.js"></script>
-    <script>
-        // Variables globales
-        var currentQuestion = 0;
-        var score = 0;
-
-        // Fonction pour démarrer le quiz
-        function startQuiz() {
-            document.getElementById("start-quiz").style.display = "none";
-            loadQuestion();
-        }
-
-        // Fonction pour charger une question
-        function loadQuestion() {
-            var questionDiv = document.getElementById("question");
-            var optionsDiv = document.getElementById("options");
-            var resultDiv = document.getElementById("result");
-            var submitBtn = document.getElementById("submit");
-            var nextBtn = document.getElementById("next");
-            var showAnswersBtn = document.getElementById("show-answers");
-
-            if (currentQuestion < questions.length) {
-                var question = questions[currentQuestion];
-                questionDiv.innerHTML = question.question;
-
-                optionsDiv.innerHTML = "";
-                if (question.options) {
-                    for (var i = 0; i < question.options.length; i++) {
-                        var option = question.options[i];
-                        var radioBtn = document.createElement("input");
-                        radioBtn.type = "radio";
-                        radioBtn.name = "answer";
-                        radioBtn.value = option;
-                        optionsDiv.appendChild(radioBtn);
-
-                        var label = document.createElement("label");
-                        label.innerHTML = option;
-                        optionsDiv.appendChild(label);
-                    }
-                } else {
-                    var textInput = document.createElement("input");
-                    textInput.type = "text";
-                    textInput.name = "answer";
-                    optionsDiv.appendChild(textInput);
-                }
-
-                resultDiv.innerHTML = "";
-                submitBtn.style.display = "block";
-                nextBtn.style.display = "none";
-                showAnswersBtn.style.display = "none";
-            } else {
-                questionDiv.innerHTML = "";
-                optionsDiv.innerHTML = "";
-                resultDiv.innerHTML = "Quiz terminé. Votre score : " + score + " sur " + questions.length;
-                submitBtn.style.display = "none";
-                nextBtn.style.display = "none";
-                showAnswersBtn.style.display = "block";
-            }
-        }
-
-        // Fonction pour vérifier la réponse
-        function checkAnswer() {
-            var selectedOption = document.querySelector('input[name="answer"]:checked');
-            var resultDiv = document.getElementById("result");
-            var submitBtn = document.getElementById("submit");
-            var nextBtn = document.getElementById("next");
-
-            if (selectedOption) {
-                var answer = selectedOption.value;
-                var question = questions[currentQuestion];
-
-                if (answer === question.answer) {
-                    resultDiv.innerHTML = "Bonne réponse !";
-                    score++;
-                } else {
-                    resultDiv.innerHTML = "Mauvaise réponse. La bonne réponse est : " + question.answer;
-                }
-
-                submitBtn.style.display = "none";
-                nextBtn.style.display = "block";
-            } else {
-                resultDiv.innerHTML = "Veuillez sélectionner une réponse.";
-            }
-        }
-
-        // Fonction pour charger la question suivante
-        function loadNextQuestion() {
-            currentQuestion++;
-            loadQuestion();
-        }
-
-        // Fonction pour afficher les réponses
-        function showAnswers() {
-            var questionDiv = document.getElementById("question");
-            var optionsDiv = document.getElementById("options");
-            var resultDiv = document.getElementById("result");
-            var submitBtn = document.getElementById("submit");
-            var nextBtn = document.getElementById("next");
-            var showAnswersBtn = document.getElementById("show-answers");
-
-            questionDiv.innerHTML = "";
-            optionsDiv.innerHTML = "";
-
-            for (var i = 0; i < questions.length; i++) {
-                var question = questions[i];
-                var questionText = document.createElement("p");
-                questionText.innerHTML = question.question;
-                questionDiv.appendChild(questionText);
-
-                var answerText = document.createElement("p");
-                answerText.innerHTML = "Réponse : " + question.answer;
-                answerText.style.fontWeight = "bold";
-                optionsDiv.appendChild(answerText);
-            }
-
-            resultDiv.innerHTML = "Quiz terminé. Votre score : " + score + " sur " + questions.length;
-            submitBtn.style.display = "none";
-            nextBtn.style.display = "none";
-            showAnswersBtn.style.display = "none";
-        }
-    </script>
 </body>
 </html>
