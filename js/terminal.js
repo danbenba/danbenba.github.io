@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", function() {
     
         switch (command) {
             case "help":
-                output = "Commandes disponibles : help, about, contact, projects, clear, exit";
+                output = "Commandes disponibles : help, about, contact, projects, clear, update, exit";
                 break;
             case "about":
                 output = "Un site développé par Dany BENBARA sous le surnom danbenba. Ce projet est l'un de mes plus gros !";
