@@ -66,7 +66,10 @@ document.addEventListener("DOMContentLoaded", function() {
                 clearTerminal();
                 break;
             case "exit":
-                window.location.href = "https://danbenba.github.io/client";
+                window.location.href = "https://danbenba.github.io";
+                break;
+            case "update":
+                window.location.href = "https://danbenba.github.io/update.html";
                 break;
             default:
                 output = "Commande non trouvée. Tapez 'help' pour voir les commandes disponibles.";
