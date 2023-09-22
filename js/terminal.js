@@ -87,11 +87,4 @@ document.addEventListener("DOMContentLoaded", function() {
         var terminalContent = document.querySelector(".terminal-content");
         terminalContent.innerHTML = "";
     }
-
-    displayWelcomeMessage();
-
-    function displayWelcomeMessage() {
-        var welcomeMessage = "Bienvenue dans le terminal.\nTapez 'help' pour voir les commandes disponibles.";
-        displayOutput(welcomeMessage);
-    }
 });

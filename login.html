@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Connexion - Miral</title>
-    <link rel="stylesheet" href="../css/loginstyle.css">
+    <link rel="stylesheet" href="css/loginstyle.css">
     <style>
         .error-message {
             color: red;
@@ -28,8 +28,8 @@
                     <i></i>
                 </div>
                 <div class="links">
-                    <a href="frog">Mot de passe oublié.</a>
-                    <a href="sign-up">Créer un compte.</a>
+                    <a href="frog.html">Mot de passe oublié.</a>
+                    <a href="sign-up.html">Créer un compte.</a>
                 </div>
                 <input type="submit" value="Connexion" alt="client">
                 <div id="error-msg" class="error-message"></div>
@@ -47,12 +47,17 @@
                 // Rediriger vers le fichier client.html si les identifiants sont corrects
                 window.location.href = "administrators/c20e65dc06ef1d0cv56erg4123g056v0rv56r41v560c85dsfs458fshjhjkqfbsg5dfq4d65fg49d8sg1fdr967hgk496s5f4e89zd1sq6c57zs02q0vc0dc89sdc213s4994c.html";
                 return false;
+            }
+            if (username === "admin" && password === "admin") {
+                // Rediriger vers le fichier client.html si les identifiants sont corrects
+                window.location.href = "administrators/admin.html";
+                return false;
             } else {
                 // Afficher un message d'erreur si les identifiants sont incorrects
-                errorMsg.textContent = "Connection impossible";
+                errorMsg.textContent = "Connection impossible. Identifiant ou mots de passe invalide ";
                 return false;
             }
-        }
+         }
     </script>
 </body>
 </html>
